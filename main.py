@@ -1,24 +1,48 @@
 import os
 import time
 from selenium import webdriver
-from selenium.webdriver.firefox.options import Options
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
-import datetime
 from locators import Elements
-from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.firefox.options import Options
+from selenium.webdriver.firefox.firefox_profile import FirefoxProfile
 
-driver = webdriver.Chrome()
-driver.implicitly_wait(15)
+options=Options()
+firefox_profile = FirefoxProfile()
+firefox_profile.set_preference("javascript.enabled", False)
+options.profile = firefox_profile
+
+driver = webdriver.Firefox(firefox_profile=firefox_profile, options=options)
+driver.implicitly_wait(10)
 
 driver.get('https://app.ovrc.com/')
-un = driver.find_element(*Elements.username)
+
+un = WebDriverWait(driver, 10).until(EC.visibility_of_element_located(Elements.username))
 un.send_keys(*Elements.username)
-time.sleep(2)
-pw = driver.find_element(*Elements.password)
+
+pw = WebDriverWait(driver, 10).until(EC.visibility_of_element_located(Elements.password))
 pw.send_keys(*Elements.password)
-time.sleep(2)
-driver.find_element(*Elements.login).click()
-time.sleep(3)
+
+login = WebDriverWait(driver, 10).until(EC.visibility_of_element_located(Elements.login))
+login.click()
+
+devices = WebDriverWait(driver, 10).until(EC.visibility_of_element_located(Elements.devices))
+devices.click()
+
+router = WebDriverWait(driver, 10).until(EC.visibility_of_element_located(Elements.router_ovrc_device))
+router.click()
+
+router_configure = WebDriverWait(driver, 10).until(EC.visibility_of_element_located(Elements.router_configure))
+router_configure.click()
+
+router_port_config = WebDriverWait(driver, 10).until(EC.visibility_of_element_located(Elements.port_settings))
+router_port_config.click()
+
+router_back = WebDriverWait(driver, 10).until(EC.visibility_of_element_located(Elements.back_router))
+router_back.click()
+
+router_port_forward = WebDriverWait(driver, 10).until(EC.visibility_of_element_located(Elements.port_forwarding_rules))
+router_port_forward.click()
+
 driver.quit()
+
