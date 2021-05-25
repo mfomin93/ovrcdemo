@@ -4,7 +4,7 @@ from selenium.webdriver.common.by import By
 class Elements:
     username = (By.XPATH, '//input[@type="email"]')
     password = (By.XPATH, '//input[@type="password"]')
-    login = (By.XPATH, '//span[@class="bk179 bk180 bk193"]')
+    login = (By.XPATH, "//span[contains(text(),'Log In')]")
     devices = (By.XPATH, '//*[@id="devices__tab"]/span/span[3]')
     router_ovrc_device = (By.XPATH, "//section[@id='root']/div[2]/div[2]/div/div/div[2]/div/div[2]/div[2]/div/div/table/tbody/tr/td[4]/span")
     router_settings = (By.XPATH, "//body/section[@id='root']/div[@class='bk200 customerListOpen']/div[@class='bk202']/div[@class='bk203']/div[@class='bk249']/div[@class='bk250']/div[@class='bk367']/div/div[@class='bk541 bk540']/div[@class='bk543']/div/table/tbody/tr[1]/td[3]")
